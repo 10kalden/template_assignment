@@ -9,7 +9,8 @@ app.get("/", (req, res) => {
 app.use(express.urlencoded({ extended: false }));
 
 app.post("/confirmation", (req, res) => {
-  data_arr.push(req.body);
+  const { name } = req.body;
+  data_arr.push(name);
   res.send("Your Name has been registered");
 });
 
@@ -18,4 +19,10 @@ app.get("/name", (req, res) => {
   res.send(data_arr);
 });
 
-app.listen(3000, () => console.log("server running on port 3000"));
+app.get("/name/:id", (req, res) => {
+  const { id } = req.params;
+  console.log(data_arr[id]);
+  res.send("Data printed in console!");
+});
+
+app.listen(4000, () => console.log("server running on port 4000"));
